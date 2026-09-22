@@ -1,0 +1,9 @@
+.planning/
+__pycache__/
+*.pyc
+.env
+venv/
+.venv/
+uploads/
+*.sqlite3
+*.db

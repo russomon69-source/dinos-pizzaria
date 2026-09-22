@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 150" width="100%" height="100%" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Dinossauro entregador correndo</title>
+  <desc id="desc">Dinossauro da DINOS Pizzaria correndo com bag de entrega.</desc>
+  <defs>
+    <linearGradient id="skin" x1="42" y1="45" x2="188" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFAE19" />
+      <stop offset="55%" stop-color="#D88924" />
+      <stop offset="100%" stop-color="#B86B4B" />
+    </linearGradient>
+    <linearGradient id="bag" x1="92" y1="29" x2="142" y2="82" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#B33927" />
+      <stop offset="100%" stop-color="#6F1F17" />
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-40%" width="170%" height="190%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 1  0 0.55 0 0 0.36  0 0 0.1 0 0.02  0 0 0 0.65 0" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <style>
+      .runner { transform-origin: 130px 86px; animation: body-bounce .42s steps(2,end) infinite; }
+      .tail { transform-origin: 76px 88px; animation: tail-swing .42s ease-in-out infinite; }
+      .front-leg { transform-origin: 144px 108px; animation: front-leg .42s steps(2,end) infinite; }
+      .back-leg { transform-origin: 108px 108px; animation: back-leg .42s steps(2,end) infinite; }
+      .arm { transform-origin: 154px 80px; animation: arm-run .42s steps(2,end) infinite; }
+      .bag { transform-origin: 120px 46px; animation: bag-bob .42s steps(2,end) infinite; }
+      .line-a { animation: speed .62s linear infinite; }
+      .line-b { animation: speed .62s linear infinite .17s; }
+      .line-c { animation: speed .62s linear infinite .31s; }
+      .ground { animation: ground .48s linear infinite; }
+      @keyframes body-bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+      @keyframes tail-swing { 0%,100% { transform: rotate(5deg); } 50% { transform: rotate(-6deg); } }
+      @keyframes front-leg { 0%,100% { transform: rotate(18deg); } 50% { transform: rotate(-20deg); } }
+      @keyframes back-leg { 0%,100% { transform: rotate(-19deg); } 50% { transform: rotate(17deg); } }
+      @keyframes arm-run { 0%,100% { transform: rotate(-14deg); } 50% { transform: rotate(14deg); } }
+      @keyframes bag-bob { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-6px) rotate(3deg); } }
+      @keyframes speed { from { transform: translateX(24px); opacity: 0; } 18% { opacity: .9; } to { transform: translateX(-88px); opacity: 0; } }
+      @keyframes ground { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 30; } }
+      @media (prefers-reduced-motion: reduce) { .runner,.tail,.front-leg,.back-leg,.arm,.bag,.line-a,.line-b,.line-c,.ground { animation: none; } }
+    </style>
+  </defs>
+
+  <g stroke="#FFAE19" stroke-linecap="round" stroke-width="4" opacity=".8">
+    <path class="line-a" d="M25 47 H92" />
+    <path class="line-b" d="M10 76 H76" />
+    <path class="line-c" d="M31 103 H98" />
+  </g>
+
+  <g class="runner" filter="url(#glow)">
+    <g class="bag">
+      <rect x="94" y="26" width="54" height="44" rx="10" fill="url(#bag)" stroke="#FFAE19" stroke-width="5" />
+      <path d="M106 26 C108 10 134 10 137 26" stroke="#FFAE19" stroke-width="5" stroke-linecap="round" />
+      <text x="121" y="55" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="13" font-weight="900" fill="#FFAE19">DINOS</text>
+    </g>
+    <path class="tail" d="M83 85 C52 75 30 85 18 105 C42 106 62 104 91 92" fill="#B86B4B" stroke="#FFAE19" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M79 82 C88 55 120 50 149 62 C175 72 190 94 183 114 C176 139 132 146 103 129 C82 117 72 99 79 82Z" fill="url(#skin)" stroke="#FFAE19" stroke-width="6" stroke-linejoin="round" />
+    <path d="M148 60 C157 36 188 30 210 45 C225 55 226 75 209 85 C194 94 171 87 154 78" fill="url(#skin)" stroke="#FFAE19" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+    <circle cx="190" cy="52" r="6" fill="#121212" stroke="#FFAE19" stroke-width="3" />
+    <circle cx="192" cy="50" r="1.5" fill="#fff" />
+    <path d="M202 68 L212 72 L202 76" stroke="#121212" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M98 62 L105 45 L112 65" fill="#B33927" stroke="#FFAE19" stroke-width="4" stroke-linejoin="round" />
+    <path d="M127 59 L136 41 L143 66" fill="#B33927" stroke="#FFAE19" stroke-width="4" stroke-linejoin="round" />
+    <path d="M168 45 L175 29 L182 49" fill="#B33927" stroke="#FFAE19" stroke-width="4" stroke-linejoin="round" />
+    <path class="arm" d="M158 84 C176 89 183 100 180 112" stroke="#FFAE19" stroke-width="8" stroke-linecap="round" />
+    <path class="back-leg" d="M110 111 C95 124 90 137 78 146" stroke="#FFAE19" stroke-width="9" stroke-linecap="round" />
+    <path class="back-leg" d="M78 146 H58" stroke="#FFAE19" stroke-width="9" stroke-linecap="round" />
+    <path class="front-leg" d="M145 112 C160 125 167 137 183 145" stroke="#FFAE19" stroke-width="9" stroke-linecap="round" />
+    <path class="front-leg" d="M183 145 H207" stroke="#FFAE19" stroke-width="9" stroke-linecap="round" />
+  </g>
+  <path class="ground" d="M32 138 H224" stroke="#FFAE19" stroke-width="5" stroke-linecap="round" stroke-dasharray="20 10" opacity=".75" />
+</svg>

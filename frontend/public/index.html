@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#121212">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="description" content="DINOS Pizzaria — Pizzas artesanais lendárias com massa de fermentação lenta de 48h, assadas em alta temperatura e recheios vulcânicos inconfundíveis.">
+  <title>DINOS Pizzaria — Pizzas as Legendary as the Dinos</title>
+
+  <!-- Official Favicon -->
+  <link rel="icon" type="image/svg+xml" href="images/dinos-logo.svg">
+
+  <!-- DINOS Dark & Neon Artisanal Design System -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="page-wrapper">
+    <!-- Top Promo Banner -->
+    <div id="top-promo-banner" class="top-promo-banner d-none" style="background: var(--color-gold); color: #000; padding: 10px; font-weight: 600; text-align: center; display: flex; justify-content: center; align-items: center; gap: 15px; font-size: 0.9rem;">
+      <span id="top-promo-text">Use o cupom DINOS10 no checkout!</span>
+      <a href="#" id="top-promo-link" class="btn btn-sm d-none" style="background: #000; color: var(--color-gold); border: none; padding: 4px 12px; border-radius: 4px;">Aproveitar</a>
+    </div>
+    <!-- Header -->
+    <header class="site-header" id="site-header">
+      <div class="container header-container">
+        <a href="/" class="brand-logo" aria-label="DINOS Pizzaria Página Inicial">
+          <img src="images/dinos-logo.svg" alt="DINOS Pizzaria logo com garra" class="brand-logo-img">
+          <div class="brand-info">
+            <span class="brand-name">DINOS <span>PIZZARIA</span></span>
+            <span class="brand-tagline">— Pizzas as Legendary as the Dinos</span>
+          </div>
+        </a>
+
+                <div class="header-actions">
+          <button type="button" class="btn btn-sm" id="track-order-btn" style="background: transparent; border: 1px solid var(--color-border); color: var(--color-text-secondary); margin-right: 8px;">
+            <span aria-hidden="true" style="margin-right: 4px;">🔎</span> Status
+          </button>
+
+          <div class="header-status-badge" aria-label="Status do Forno">
+            <span class="live-dot"></span>
+            <span>Forno a Lenha Aceso</span>
+          </div>
+
+          <button type="button" class="cart-trigger-btn" id="cart-trigger-btn" aria-label="Abrir Carrinho de Compras">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span>Carrinho</span>
+            <span class="cart-badge" id="cart-count-badge">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section / Combos & Promos -->
+      <section class="hero-section" id="hero-promos">
+        <div class="hero-embers" id="hero-embers" aria-hidden="true"></div>
+        <div class="container">
+          <div class="hero-banner">
+            <div class="hero-tag-badge">
+              <span class="pulse-dot"></span> Forno artesanal aceso • Pedido direto no WhatsApp
+            </div>
+            <h1 class="hero-title">Pizza artesanal <span>forjada no fogo lendário</span></h1>
+            <p class="hero-subtitle">Massa de longa fermentação, borda tostada no forno de alta temperatura e sabores jurássicos criados para chegar quentinhos no seu pedido.</p>
+
+            <div class="hero-cta-group" aria-label="Ações principais">
+              <a href="#menu-container" class="btn btn-primary hero-cta-main">Ver cardápio e pedir</a>
+              <a href="#hero-promos-grid" class="btn btn-secondary hero-cta-secondary">🔥 Ver combos de hoje</a>
+            </div>
+
+            <p class="hero-brand-signature">Pizzas as Legendary as the Dinos</p>
+
+            <!-- Hero Highlights Badges -->
+            <div class="hero-highlights">
+              <div class="highlight-pill">
+                <span class="highlight-icon">🔥</span>
+                <span>Forno a lenha 450°C</span>
+              </div>
+              <div class="highlight-pill">
+                <span class="highlight-icon">🌾</span>
+                <span>Fermentação lenta 48h</span>
+              </div>
+              <div class="highlight-pill">
+                <span class="highlight-icon">🍅</span>
+                <span>Molho pelati</span>
+              </div>
+              <div class="highlight-pill">
+                <span class="highlight-icon">🛵</span>
+                <span>Entrega 35–45 min</span>
+              </div>
+              <div class="highlight-pill">
+                <span class="highlight-icon">⭐</span>
+                <span>Pedido no WhatsApp</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Promos Grid -->
+          <div class="hero-promos-container">
+            <div class="hero-promos-grid" id="hero-promos-grid">
+              <!-- Loaded dynamically by app.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Conversion Trust Strip -->
+      <section class="conversion-strip" aria-label="Por que pedir na DINOS">
+        <div class="container conversion-grid">
+          <article class="conversion-card">
+            <span class="conversion-icon">🔥</span>
+            <div>
+              <h3>Forno no ponto</h3>
+              <p>Calor alto para borda tostada, massa leve e queijo borbulhando.</p>
+            </div>
+          </article>
+          <article class="conversion-card">
+            <span class="conversion-icon">🦖</span>
+            <div>
+              <h3>Combos lendários</h3>
+              <p>Promoções jurássicas pensadas para dividir ou matar a fome sozinho.</p>
+            </div>
+          </article>
+          <article class="conversion-card">
+            <span class="conversion-icon">🛵</span>
+            <div>
+              <h3>Entrega calculada</h3>
+              <p>Escolha seu bairro e veja o total antes de enviar o pedido.</p>
+            </div>
+          </article>
+          <article class="conversion-card">
+            <span class="conversion-icon">📲</span>
+            <div>
+              <h3>Finaliza no WhatsApp</h3>
+              <p>Checkout rápido e confirmação direta com a cozinha da DINOS.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+            <!-- Featured Products Section -->
+      <section class="featured-products-section d-none" id="featured-products-section" style="padding: var(--space-xl) 0;">
+        <div class="container">
+          <div class="category-header text-center" style="margin-bottom: var(--space-lg);">
+            <h2 class="category-title" id="featured-section-title">⭐ Mais Pedidas</h2>
+            <p style="color: var(--color-text-muted);" id="featured-section-subtitle">As favoritas dos dinossauros</p>
+          </div>
+          <div class="products-grid" id="featured-products-grid">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Sticky Category Navigation -->
+      <nav class="category-nav-wrapper" id="category-nav" aria-label="Categorias do Cardápio">
+        <div class="container">
+          <div class="category-nav-list" id="category-tabs-container" role="tablist">
+            <!-- Loaded dynamically by app.js -->
+          </div>
+        </div>
+      </nav>
+
+      <!-- Menu Section -->
+      <section class="menu-container" id="menu-container">
+        <div class="container">
+          <div class="menu-toolbar" aria-label="Busca e filtros do cardápio">
+            <div class="menu-search-box">
+              <span class="menu-search-icon" aria-hidden="true">🔎</span>
+              <label for="menu-search-input" class="sr-only">Buscar no cardápio</label>
+              <input type="search" id="menu-search-input" placeholder="Buscar pizza, combo ou ingrediente..." autocomplete="off">
+            </div>
+            <div class="menu-filter-chips" role="group" aria-label="Filtros rápidos">
+              <button type="button" class="menu-filter-chip active" data-filter="all">Todos</button>
+              <button type="button" class="menu-filter-chip" data-filter="promos">Promoções</button>
+              <button type="button" class="menu-filter-chip" data-filter="combos">Combos</button>
+            </div>
+          </div>
+          <div id="menu-sections-wrapper">
+            <!-- Loaded dynamically by app.js -->
+          </div>
+        </div>
+      </section>
+          <!-- Reviews Section -->
+      <section class="reviews-section d-none" id="reviews-section" style="padding: var(--space-2xl) 0; background: var(--color-bg-card); border-top: 1px solid var(--color-border);">
+        <div class="container">
+          <div class="category-header text-center" style="margin-bottom: var(--space-lg);">
+            <h2 class="category-title" id="reviews-section-title">💬 O que dizem sobre nós</h2>
+            <p style="color: var(--color-text-muted);" id="reviews-section-subtitle">Avaliações de quem já experimentou</p>
+          </div>
+          <div class="reviews-grid" id="reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md);">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Artisanal Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Brand Column -->
+          <div class="footer-brand">
+            <div class="footer-brand-title">
+              <img src="images/dinos-logo.svg" alt="DINOS Logo" style="width: 38px; height: 38px; filter: drop-shadow(0 0 8px rgba(255, 174, 25, 0.5));">
+              <span>DINOS</span> PIZZARIA
+            </div>
+            <p class="footer-brand-desc">
+              Pizzas artesanais com sabor da era jurássica. Ingredientes nobres selecionados, fermentação lenta de 48 horas e cocção em forno em altíssima temperatura.
+            </p>
+            <div style="margin-top: var(--space-xs);">
+              <span class="badge badge-gold">🦖 Tradição & Fogo</span>
+            </div>
+          </div>
+
+          <!-- Hours Column -->
+          <div>
+            <h4 class="footer-col-title"><span>⏰</span> Horários</h4>
+            <div class="footer-info-item">
+              <strong>Terça a Quinta:</strong><br>18:00 às 23:30
+            </div>
+            <div class="footer-info-item">
+              <strong>Sexta e Sábado:</strong><br>18:00 às 00:30
+            </div>
+            <div class="footer-info-item">
+              <strong>Domingo:</strong><br>18:00 às 23:30
+            </div>
+            <div class="footer-info-item" style="color: var(--color-gold); font-weight: 600;">
+              Segunda-feira: Fechado para descanso da equipe
+            </div>
+          </div>
+
+          <!-- Payment & Delivery Column -->
+          <div>
+            <h4 class="footer-col-title"><span>💳</span> Pagamento</h4>
+            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: var(--space-xs);">
+              Aceitamos diversas formas de pagamento no checkout e na entrega:
+            </p>
+            <div class="footer-payment-badges">
+              <span class="payment-badge">⚡ Pix Instantâneo</span>
+              <span class="payment-badge">💳 Crédito</span>
+              <span class="payment-badge">💳 Débito</span>
+              <span class="payment-badge">💵 Dinheiro</span>
+            </div>
+            <div style="margin-top: var(--space-md); font-size: 0.85rem;">
+              <strong style="color: var(--color-gold);">🛵 Raio de Entrega:</strong>
+              <div style="color: var(--color-text-muted);">Entrega rápida com taxa calculada por bairro.</div>
+            </div>
+          </div>
+
+          <!-- Contact & WhatsApp Column -->
+          <div>
+            <h4 class="footer-col-title"><span>📲</span> Atendimento</h4>
+            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: var(--space-sm);">
+              Faça seu pedido diretamente pelo site ou tire dúvidas com nossos pizzaiolos:
+            </p>
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="width: 100%; font-size: 0.88rem; padding: 10px;">
+              <span>💬 WhatsApp Direto</span>
+            </a>
+            <div style="margin-top: var(--space-sm); font-size: 0.8rem; color: var(--color-text-muted);">
+              📍 Atendimento para pedidos online e balcão.
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Line -->
+        <div class="footer-bottom">
+          <div>
+            © 2026 DINOS Pizzaria. Todos os direitos reservados.
+          </div>
+          <div style="color: var(--color-gold); font-family: var(--font-display); font-weight: 700;">
+            🦖 Pizzas as Legendary as the Dinos 🍕
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="drawer-backdrop" id="cart-backdrop" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Carrinho de Compras" aria-hidden="true">
+    <div class="drawer-header">
+      <h2 class="drawer-title">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        Seu Pedido
+      </h2>
+      <button type="button" class="drawer-close-btn" id="cart-close-btn" aria-label="Fechar Carrinho">&times;</button>
+    </div>
+
+    <div class="drawer-items-list" id="cart-items-list">
+      <!-- Loaded dynamically by cart.js -->
+    </div>
+
+    <div class="drawer-footer" id="cart-footer">
+      <div class="drawer-summary-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">R$ 0,00</span>
+      </div>
+      <div class="drawer-summary-row" id="cart-delivery-row">
+        <span id="cart-delivery-label">Taxa de Entrega</span>
+        <span id="cart-delivery-fee">A calcular</span>
+      </div>
+      <div class="drawer-summary-row total-row">
+        <span>Total</span>
+        <span class="total-val" id="cart-total">R$ 0,00</span>
+      </div>
+      <button type="button" class="btn btn-primary btn-checkout" id="cart-checkout-btn">
+        Continuar para Entrega
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Sticky Cart Bar -->
+  <div class="sticky-cart-bar" id="sticky-cart-bar" aria-hidden="true">
+    <button type="button" class="sticky-cart-btn" id="sticky-cart-btn" aria-label="Abrir sacola e finalizar pedido">
+      <span class="sticky-cart-copy">
+        <strong><span id="sticky-cart-count">0</span> item(ns) na sacola</strong>
+        <small>Total agora: <span id="sticky-cart-total">R$ 0,00</span></small>
+      </span>
+      <span class="sticky-cart-action">Ver sacola</span>
+    </button>
+  </div>
+
+  <!-- Item Details & Customization Modal -->
+  <div class="modal-overlay" id="item-modal-overlay" aria-hidden="true">
+    <div class="modal-card" id="item-modal-card">
+      <div class="modal-header">
+        <h3 id="item-modal-title">Detalhes do Item</h3>
+        <button type="button" class="drawer-close-btn" id="item-modal-close-btn" aria-label="Fechar Detalhes">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img src="" alt="" class="modal-item-image" id="item-modal-image" loading="lazy">
+        <p class="modal-item-desc" id="item-modal-desc"></p>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-md);">
+          <span style="font-size: 0.9rem; font-weight: 700;">Preço Unitário:</span>
+          <span class="text-gold" style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 800;" id="item-modal-price">R$ 0,00</span>
+        </div>
+
+        <div class="pizza-options-panel d-none" id="item-modal-pizza-options" aria-label="Opções da pizza">
+          <div class="pizza-option-block">
+            <label for="item-modal-size" class="form-label">Tamanho da pizza</label>
+            <select id="item-modal-size" class="pizza-option-select"></select>
+          </div>
+          <div class="pizza-option-block">
+            <label for="item-modal-crust" class="form-label">Borda recheada</label>
+            <select id="item-modal-crust" class="pizza-option-select">
+              <option value="none" data-price="0">Sem borda recheada</option>
+              <option value="catupiry" data-price="7.50">Catupiry + R$ 7,50</option>
+              <option value="cheddar" data-price="7.50">Cheddar + R$ 7,50</option>
+              <option value="chocolate" data-price="7.50">Chocolate + R$ 7,50</option>
+            </select>
+          </div>
+          <div class="pizza-option-block">
+            <span class="form-label" id="item-modal-flavors-label">Sabores da pizza <small>(toque em até 4)</small></span>
+            <div
+              id="item-modal-flavors"
+              class="pizza-flavor-grid"
+              role="group"
+              aria-labelledby="item-modal-flavors-label"
+              aria-describedby="item-modal-flavors-help"
+            ></div>
+            <small class="pizza-option-help" id="item-modal-flavors-help">Toque nas caixas para montar sua pizza. Se não escolher, usamos o sabor do item aberto.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="item-modal-notes" class="notes-label">Observações (opcional):</label>
+          <textarea id="item-modal-notes" class="modal-notes-input" placeholder="Ex: Sem cebola, massa bem tostada, caprichar no orégano..."></textarea>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-md);">
+          <span style="font-weight: 700;">Quantidade:</span>
+          <div class="qty-control">
+            <button type="button" class="qty-btn" id="item-modal-qty-minus" aria-label="Diminuir quantidade">-</button>
+            <span class="qty-val" id="item-modal-qty-val">1</span>
+            <button type="button" class="qty-btn" id="item-modal-qty-plus" aria-label="Aumentar quantidade">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer modal-footer-dual">
+        <button type="button" class="btn btn-secondary modal-action-btn" id="item-modal-add-continue-btn">
+          Adicionar e Continuar
+        </button>
+        <button type="button" class="btn btn-primary modal-action-btn" id="item-modal-add-cart-btn">
+          Adicionar e Ir para o Carrinho (<span id="item-modal-subtotal">R$ 0,00</span>)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout One-Page Modal -->
+  <div class="modal-overlay" id="checkout-modal-overlay" aria-hidden="true">
+    <div class="modal-card" id="checkout-modal-card" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 id="checkout-modal-title">Finalizar Pedido</h3>
+        <button type="button" class="drawer-close-btn" id="checkout-modal-close-btn" aria-label="Fechar Checkout">&times;</button>
+      </div>
+      <div class="modal-body">
+                <form id="checkout-form">
+          <!-- Store Closed Warning -->
+          <div id="store-closed-warning" class="d-none" style="background: rgba(179, 57, 39, 0.1); border: 1px solid var(--color-rustic-red); color: var(--color-rustic-red); padding: var(--space-md); border-radius: var(--radius-md); margin-bottom: var(--space-md); text-align: center;">
+            <strong style="display: block; font-size: 1.1rem; margin-bottom: var(--space-xs);">⚠️ Loja Temporariamente Fechada</strong>
+            <span id="store-closed-message">Infelizmente nossa loja está fechada no momento. Mas você pode agendar seu pedido para mais tarde!</span>
+          </div>
+
+          <!-- Scheduling Options -->
+          <div class="checkout-section" style="display: flex; gap: var(--space-sm); align-items: center; justify-content: space-between; background: var(--color-bg-card); padding: var(--space-md); border-radius: var(--radius-md); border: 1px solid var(--color-border);">
+            <div style="flex: 1;">
+              <label class="payment-option-label" style="width: 100%; margin-bottom: 0;">
+                <input type="radio" name="fulfillment_time_type" value="asap" checked>
+                <span>🚀 Preparar Agora</span>
+              </label>
+            </div>
+            <div style="flex: 1;">
+              <label class="payment-option-label" style="width: 100%; margin-bottom: 0;">
+                <input type="radio" name="fulfillment_time_type" value="scheduled">
+                <span>📅 Agendar</span>
+              </label>
+            </div>
+          </div>
+          <div class="checkout-section d-none" id="scheduled-for-group" style="margin-top: -10px; padding-top: 0; border: none; background: transparent;">
+            <div class="form-group">
+              <label for="scheduled-for-input" class="form-label">Data e Hora do Agendamento *</label>
+              <input type="datetime-local" id="scheduled-for-input" class="form-input">
+              <small class="text-muted" style="display: block; margin-top: 4px;">Agende com pelo menos 60 minutos de antecedência.</small>
+            </div>
+          </div>
+
+          <!-- Delivery Type Selector -->
+          <div class="checkout-tabs">
+            <button type="button" class="checkout-tab-btn active" id="tab-delivery" data-type="delivery">
+              🛵 Entrega
+            </button>
+            <button type="button" class="checkout-tab-btn" id="tab-pickup" data-type="pickup">
+              🏪 Retirada no Balcão (Grátis)
+            </button>
+          </div>
+
+          <!-- Customer Identification -->
+          <div class="checkout-section">
+            <h4 class="checkout-section-title">👤 Seus Dados</h4>
+            <div class="form-group">
+              <label for="customer-name" class="form-label">Nome Completo *</label>
+              <input type="text" id="customer-name" required placeholder="Seu nome" autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="customer-phone" class="form-label">WhatsApp / Telefone *</label>
+              <input type="tel" id="customer-phone" required placeholder="(99) 99999-9999" autocomplete="tel">
+            </div>
+          </div>
+
+          <!-- Delivery Address (Conditional) -->
+          <div class="checkout-section" id="delivery-fields-container">
+            <h4 class="checkout-section-title">📍 Endereço de Entrega</h4>
+            <div class="form-group">
+              <label for="delivery-zone-select" class="form-label">Bairro de Entrega *</label>
+              <select id="delivery-zone-select" required>
+                <option value="">Selecione o bairro...</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group" style="flex: 2;">
+                <label for="customer-street" class="form-label">Rua / Logradouro *</label>
+                <input type="text" id="customer-street" placeholder="Nome da rua">
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label for="customer-number" class="form-label">Número *</label>
+                <input type="text" id="customer-number" placeholder="123">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="customer-complement" class="form-label">Complemento / Apto</label>
+                <input type="text" id="customer-complement" placeholder="Ex: Bloco B Apto 102">
+              </div>
+              <div class="form-group">
+                <label for="customer-reference" class="form-label">Ponto de Referência</label>
+                <input type="text" id="customer-reference" placeholder="Ex: Próximo à padaria">
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Method Selector -->
+          <div class="checkout-section">
+            <h4 class="checkout-section-title">💳 Forma de Pagamento</h4>
+            <div class="payment-options">
+              <label class="payment-option-label">
+                <input type="radio" name="payment_method" value="pix" checked>
+                <span>⚡ Pix</span>
+              </label>
+              <label class="payment-option-label">
+                <input type="radio" name="payment_method" value="credit_card">
+                <span>💳 Cartão de Crédito</span>
+              </label>
+              <label class="payment-option-label">
+                <input type="radio" name="payment_method" value="debit_card">
+                <span>💳 Cartão de Débito</span>
+              </label>
+              <label class="payment-option-label">
+                <input type="radio" name="payment_method" value="cash">
+                <span>💵 Dinheiro</span>
+              </label>
+            </div>
+
+            <!-- Dynamic Change Input (For Cash) -->
+            <div class="form-group d-none" id="cash-change-group" style="margin-top: var(--space-sm);">
+              <label for="change-for-input" class="form-label">Troco para quanto?</label>
+              <input type="text" id="change-for-input" placeholder="Ex: 100,00 (deixe em branco se não precisar)">
+            </div>
+          </div>
+
+                    <!-- Coupon Code -->
+          <div class="checkout-section" style="display: flex; gap: var(--space-sm); align-items: flex-end;">
+            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+              <label for="coupon-code-input" class="form-label">Cupom de Desconto</label>
+              <input type="text" id="coupon-code-input" placeholder="Ex: DINOS10" style="text-transform: uppercase;">
+            </div>
+            <button type="button" class="btn btn-secondary" id="apply-coupon-btn" style="height: 48px;">Aplicar</button>
+            <button type="button" class="btn btn-danger d-none" id="remove-coupon-btn" style="height: 48px; background: transparent; color: var(--color-rustic-red); border-color: var(--color-rustic-red);">Remover</button>
+          </div>
+          <div id="coupon-message" style="margin-top: -8px; margin-bottom: 16px; font-size: 0.85rem;" class="d-none"></div>
+
+                    <!-- Order Summary Details -->
+          <div class="checkout-section" style="background: var(--color-bg-card); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); border: 1px solid var(--color-border);">
+            <div class="drawer-summary-row">
+              <span>Subtotal dos itens:</span>
+              <span id="checkout-summary-subtotal">R$ 0,00</span>
+            </div>
+            <div class="drawer-summary-row d-none" id="checkout-summary-discount-row" style="color: #10B981;">
+              <span>Desconto (<span id="checkout-summary-coupon-code"></span>):</span>
+              <span id="checkout-summary-discount">- R$ 0,00</span>
+            </div>
+            <div class="drawer-summary-row">
+              <span>Taxa de entrega:</span>
+              <span id="checkout-summary-fee">R$ 0,00</span>
+            </div>
+            <div class="drawer-summary-row total-row">
+              <span>Total do Pedido:</span>
+              <span class="total-val" id="checkout-summary-total">R$ 0,00</span>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="padding-left: 0; padding-right: 0; padding-bottom: 0;">
+            <button type="submit" class="btn btn-primary" style="width: 100%;" id="submit-order-btn">
+              Confirmar & Enviar para o WhatsApp
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delivery Animation Overlay (shown while sending order to WhatsApp) -->
+  <div class="delivery-runner-overlay" id="delivery-runner-overlay" aria-hidden="true">
+    <div class="delivery-runner-card" role="status" aria-live="polite">
+      <img src="images/delivery-dino-runner.svg" alt="Dinossauro entregador correndo" class="delivery-runner-img">
+      <div class="delivery-runner-road" aria-hidden="true"></div>
+      <h3 id="delivery-runner-title">Seu pedido saiu correndo para a cozinha!</h3>
+      <p id="delivery-runner-message">Estamos preparando tudo para abrir o WhatsApp da DINOS.</p>
+      <ol class="delivery-timeline" id="delivery-timeline" aria-label="Progresso do pedido para WhatsApp">
+        <li class="delivery-step active" data-step="0"><span>1</span><strong>Validando pedido</strong></li>
+        <li class="delivery-step" data-step="1"><span>2</span><strong>Aquecendo cozinha</strong></li>
+        <li class="delivery-step" data-step="2"><span>3</span><strong>Chamando WhatsApp</strong></li>
+        <li class="delivery-step" data-step="3"><span>4</span><strong>Quase lá</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Order Success / WhatsApp Confirmation Modal -->
+  <div class="modal-overlay" id="success-modal-overlay" aria-hidden="true">
+    <div class="modal-card" id="success-modal-card" style="max-width: 500px;">
+      <div class="modal-body success-modal-content">
+        <div class="success-icon-badge">🦖🔥</div>
+        <h2 style="font-size: 1.5rem; margin-bottom: var(--space-xs);">Pedido Realizado com Sucesso!</h2>
+        <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: var(--space-md);">
+          Seu pedido foi registrado em nossa cozinha lendária.
+        </p>
+        <div class="success-order-num" id="success-order-id">#0000</div>
+
+        <div style="background: var(--color-bg-card); border-radius: var(--radius-md); padding: var(--space-md); margin: var(--space-md) 0; text-align: left; font-size: 0.9rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-xs);">
+            <span class="text-muted">Cliente:</span>
+            <strong id="success-customer-name">-</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-xs);">
+            <span class="text-muted">Tipo:</span>
+            <span id="success-order-type">-</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span class="text-muted">Valor Total:</span>
+            <strong class="text-gold" id="success-order-total">R$ 0,00</strong>
+          </div>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: var(--space-lg);">
+          Clique no botão abaixo para abrir a conversa no WhatsApp da DINOS e acompanhar seu preparo em tempo real:
+        </p>
+
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" id="success-whatsapp-btn" style="width: 100%; font-size: 1.1rem; padding: var(--space-md); margin-bottom: var(--space-sm);">
+          📲 Abrir no WhatsApp
+        </a>
+
+        <button type="button" class="btn btn-secondary" id="success-close-btn" style="width: 100%;">
+          Voltar ao Cardápio
+        </button>
+      </div>
+    </div>
+  </div>
+
+    <!-- Track Order Modal -->
+  <div class="modal-overlay" id="track-order-modal-overlay" aria-hidden="true">
+    <div class="modal-card" id="track-order-modal-card" style="max-width: 400px;">
+      <div class="modal-header">
+        <h3 id="track-order-modal-title">Acompanhar Pedido</h3>
+        <button type="button" class="drawer-close-btn" id="track-order-close-btn" aria-label="Fechar Consulta">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="track-order-form">
+          <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: var(--space-md);">
+            Digite o número do seu pedido e o telefone usado na compra para verificar o status atual.
+          </p>
+          <div class="form-group">
+            <label for="track-order-id-input" class="form-label">Número do Pedido</label>
+            <input type="text" id="track-order-id-input" placeholder="Ex: 5" required>
+          </div>
+          <div class="form-group">
+            <label for="track-order-phone-input" class="form-label">WhatsApp / Telefone</label>
+            <input type="tel" id="track-order-phone-input" placeholder="(99) 99999-9999" required>
+          </div>
+          <button type="button" class="btn btn-primary" id="track-order-submit-btn" style="width: 100%;">
+            Consultar Status
+          </button>
+        </div>
+        <div id="track-order-result" class="d-none" style="margin-top: var(--space-md); padding: var(--space-md); background: var(--color-bg-card); border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: center;">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- ES6 Modules Entry Point -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

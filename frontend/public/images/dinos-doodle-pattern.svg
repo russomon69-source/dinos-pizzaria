@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" fill="none" opacity="0.04">
+  <!-- Pizza Slice -->
+  <g stroke="#FFAE19" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M25,20 L50,60 L10,60 Z" />
+    <path d="M10,60 Q30,66 50,60" />
+    <circle cx="28" cy="40" r="2.5" />
+    <circle cx="36" cy="50" r="2" />
+  </g>
+
+  <!-- Dino Footprint / Claw -->
+  <g stroke="#FFAE19" stroke-width="1.5" stroke-linecap="round">
+    <path d="M150,30 L150,45" />
+    <path d="M142,33 L149,45" />
+    <path d="M158,33 L151,45" />
+    <circle cx="150" cy="48" r="3" fill="#FFAE19" />
+  </g>
+
+  <!-- Chef Hat -->
+  <g stroke="#FFAE19" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M130,140 C125,130 135,120 145,125 C155,115 165,125 165,135 C175,135 175,145 168,150 L128,150 Z" />
+    <path d="M130,150 L130,158 L166,158 L166,150" />
+  </g>
+
+  <!-- Pizza Cutter Wheel -->
+  <g stroke="#FFAE19" stroke-width="1.5" stroke-linecap="round">
+    <circle cx="45" cy="145" r="14" />
+    <path d="M45,145 L70,170" stroke-width="2.5" />
+    <circle cx="45" cy="145" r="2.5" fill="#FFAE19" />
+  </g>
+
+  <!-- Flame / Fire -->
+  <g stroke="#FFAE19" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M100,85 C95,95 90,105 100,115 C110,105 105,95 100,85 Z" />
+    <path d="M100,100 C97,105 97,109 100,113 C103,109 103,105 100,100 Z" />
+  </g>
+
+  <!-- Rolling Pin -->
+  <g stroke="#FFAE19" stroke-width="1.5" stroke-linecap="round">
+    <rect x="80" y="25" width="40" height="10" rx="3" transform="rotate(30 100 30)" />
+    <path d="M72,21 L80,26" transform="rotate(30 100 30)" />
+    <path d="M120,26 L128,31" transform="rotate(30 100 30)" />
+  </g>
+</svg>

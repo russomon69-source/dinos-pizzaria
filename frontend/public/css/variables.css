@@ -1,0 +1,112 @@
+/* ==========================================================================
+   DINOS Pizzaria — Design System Tokens (Dark & Neon Artisanal Pizzeria)
+   ========================================================================== */
+
+:root {
+  /* DINOS Official Brand Palette */
+  --color-bg-primary: #121212;          /* Charred Black */
+  --color-bg-surface: #181818;          /* Dark Surface */
+  --color-bg-card: #202020;             /* Card Background */
+  --color-bg-card-glass: rgba(28, 28, 28, 0.78); /* Frosted Glass Card */
+  --color-bg-card-hover: #262626;       /* Card Hover State */
+  --color-bg-input: #1a1a1a;            /* Input Background */
+  --color-border: #2e2e2e;              /* Subtle Border */
+  --color-border-glow: rgba(255, 174, 25, 0.35); /* Neon Accent Border */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Premium Oven Materials */
+  --color-bg-deep: #0B0A08;             /* Deep oven charcoal */
+  --color-bg-oven: #15100C;             /* Smoked wood-fired surface */
+  --color-bg-ember: #21140D;            /* Ember-dark panel */
+  --color-crust: #D08A42;               /* Toasted crust accent */
+  --color-brass-muted: #C28A35;         /* Aged brass premium accent */
+  --color-flour-dust: rgba(244, 232, 208, 0.72);
+  --color-smoke: rgba(244, 232, 208, 0.08);
+  --color-charcoal-line: rgba(244, 232, 208, 0.12);
+
+  /* DINOS Brand Accents */
+  --color-gold: #FFAE19;                /* Neon Gold */
+  --color-gold-hover: #ffbe3b;          /* Neon Gold Hover */
+  --color-gold-glow: rgba(255, 174, 25, 0.45);
+  --color-gold-subtle: rgba(255, 174, 25, 0.12);
+  --color-clay: #B86B4B;                /* Warm Clay / Terracotta */
+  --color-rustic-red: #B33927;          /* Rustic Red / San Marzano */
+  --color-red-glow: rgba(179, 57, 39, 0.45);
+  --color-whatsapp: #25D366;            /* WhatsApp Green */
+  --color-whatsapp-hover: #20ba59;
+  --color-whatsapp-glow: rgba(37, 211, 102, 0.45);
+
+  /* Oven & Flame Gradients */
+  --gradient-oven-glow: radial-gradient(circle at 50% -10%, rgba(255, 174, 25, 0.28) 0%, rgba(179, 57, 39, 0.18) 40%, rgba(18, 18, 18, 0) 75%);
+  --gradient-oven-premium: radial-gradient(circle at 50% 0%, rgba(255, 174, 25, 0.24) 0%, rgba(184, 107, 75, 0.16) 32%, rgba(11, 10, 8, 0) 70%);
+  --gradient-smoke-vignette: linear-gradient(180deg, rgba(11, 10, 8, 0.2) 0%, rgba(11, 10, 8, 0.92) 100%);
+  --gradient-card-border: linear-gradient(135deg, rgba(255, 174, 25, 0.5), rgba(179, 57, 39, 0.2), rgba(255, 255, 255, 0.05));
+  --gradient-premium-card: linear-gradient(155deg, rgba(34, 24, 16, 0.92), rgba(17, 15, 13, 0.98));
+  --gradient-gold: linear-gradient(135deg, #FFAE19, #e69500);
+  --gradient-gold-hover: linear-gradient(135deg, #ffbe3b, #FFAE19);
+  --gradient-rustic: linear-gradient(135deg, #B33927, #B86B4B);
+
+  /* Status Colors */
+  --color-success: #2ecc71;
+  --color-error: #e74c3c;
+  --color-warning: #f39c12;
+  --color-info: #3498db;
+
+  /* Typography Colors */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #D4D4D8;
+  --color-text-muted: #8E8E93;
+  --color-text-gold: #FFAE19;
+
+  /* Typography Families */
+  --font-display: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing Scale */
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Border Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 9999px;
+
+  /* Shadows & Neon Glows */
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.58);
+  --shadow-card-hover: 0 16px 42px rgba(0, 0, 0, 0.82), 0 0 18px rgba(255, 174, 25, 0.18);
+  --shadow-premium-card: 0 18px 50px rgba(0, 0, 0, 0.64), inset 0 1px 0 rgba(244, 232, 208, 0.07);
+  --shadow-oven-soft: 0 18px 65px rgba(179, 57, 39, 0.16);
+  --shadow-neon-gold: 0 0 14px rgba(255, 174, 25, 0.34);
+  --shadow-neon-gold-lg: 0 0 24px rgba(255, 174, 25, 0.5);
+  --shadow-neon-red: 0 0 16px rgba(179, 57, 39, 0.45);
+  --shadow-neon-whatsapp: 0 0 18px rgba(37, 211, 102, 0.4);
+  --shadow-drawer: -10px 0 42px rgba(0, 0, 0, 0.88);
+  --shadow-modal: 0 16px 58px rgba(0, 0, 0, 0.92);
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Z-Index Layers */
+  --z-base: 1;
+  --z-sticky-nav: 90;
+  --z-header: 100;
+  --z-floating-btn: 110;
+  --z-fly-particle: 180;
+  --z-drawer-backdrop: 190;
+  --z-drawer: 200;
+  --z-modal-backdrop: 300;
+  --z-modal: 310;
+  --z-toast: 400;
+}

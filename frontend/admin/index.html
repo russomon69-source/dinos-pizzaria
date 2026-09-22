@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="theme-color" content="#121212">
+  <meta name="description" content="Painel de Gestão Administrativa — DINOS Pizzaria">
+  <title>DINOS Pizzaria — Painel Administrativo</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦖</text></svg>">
+
+  <!-- DINOS Dark & Neon Design System -->
+  <link rel="stylesheet" href="/admin/css/variables.css">
+  <link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. LOGIN VIEW CONTAINER (#login-view)
+       ========================================================================= -->
+  <div id="login-view" class="login-view">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="brand-mascot" role="img" aria-label="Dinossauro">🦖</div>
+        <h1 class="brand-title">DINOS <span>ADMIN</span></h1>
+        <p class="brand-subtitle">Painel de Gestão & Monitor de Pedidos</p>
+      </div>
+
+      <div id="login-error-alert" class="alert-banner alert-banner--error d-none" role="alert">
+        <span class="alert-icon">⚠️</span>
+        <span id="login-error-message" class="alert-text">Credenciais inválidas.</span>
+      </div>
+
+      <form id="login-form" class="login-form" novalidate>
+        <div class="form-group">
+          <label for="login-username" class="form-label">Usuário Administrativo</label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="login-username"
+              name="username"
+              class="form-input"
+              placeholder="Digite seu usuário..."
+              autocomplete="username"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password" class="form-label">Senha de Acesso</label>
+          <div class="input-wrapper">
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              class="form-input"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            >
+          </div>
+        </div>
+
+        <button type="submit" id="login-submit-btn" class="btn btn-primary btn-block btn-lg">
+          <span>Entrar no Painel</span>
+          <span class="btn-spinner d-none" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <div class="login-footer">
+        <a href="/" class="login-back-link">← Voltar para o Cardápio Público</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. ADMIN LAYOUT CONTAINER (#admin-layout)
+       ========================================================================= -->
+  <div id="admin-layout" class="admin-layout d-none">
+
+    <!-- Sidebar Navigation -->
+    <aside id="admin-sidebar" class="admin-sidebar" aria-label="Navegação Administrativa">
+      <div class="sidebar-header">
+        <a href="/admin" class="sidebar-brand">
+          <span class="sidebar-logo">🦖</span>
+          <div class="sidebar-brand-text">
+            <span class="brand-name">DINOS <span>ADMIN</span></span>
+            <span class="brand-tag">v1.0 • Cozinha</span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button type="button" class="nav-item" data-tab="orders" id="tab-btn-orders">
+          <span class="nav-icon">🍕</span>
+          <span class="nav-label">Pedidos em Tempo Real</span>
+          <span id="orders-badge" class="nav-badge d-none">0</span>
+        </button>
+
+        <button type="button" class="nav-item active" data-tab="products" id="tab-btn-products">
+          <span class="nav-icon">🍔</span>
+          <span class="nav-label">Produtos do Cardápio</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="combos" id="tab-btn-combos">
+          <span class="nav-icon">🦖</span>
+          <span class="nav-label">Combos & Promoções</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="zones" id="tab-btn-zones">
+          <span class="nav-icon">🛵</span>
+          <span class="nav-label">Bairros & Taxas</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="coupons" id="tab-btn-coupons">
+          <span class="nav-icon">🎟️</span>
+          <span class="nav-label">Cupons de Desconto</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="reviews" id="tab-btn-reviews">
+          <span class="nav-icon">⭐</span>
+          <span class="nav-label">Avaliações</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="settings" id="tab-btn-settings">
+          <span class="nav-icon">✍️</span>
+          <span class="nav-label">Textos do Site</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button type="button" id="btn-toggle-sound" class="sidebar-sound-btn" title="Alternar Alerta Sonoro de Novos Pedidos">
+          <span id="sound-icon" class="sound-icon">🔔</span>
+          <span id="sound-label" class="sound-label">Alertas Sonoros: ON</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Container (Header + Content) -->
+    <div class="admin-main-wrapper">
+
+      <!-- Top Header -->
+      <header id="admin-header" class="admin-header">
+        <div class="header-left">
+          <button type="button" id="btn-toggle-sidebar" class="btn-icon mobile-sidebar-toggle" aria-label="Abrir Menu">
+            ☰
+          </button>
+          <h2 id="header-tab-title" class="header-tab-title">Produtos do Cardápio</h2>
+        </div>
+
+        <div class="header-right">
+          <div id="store-status-badge" class="status-badge status-badge--online" title="Sistema Operacional Conectado">
+            <span class="status-dot"></span>
+            <span class="status-text">Online</span>
+          </div>
+
+          <div class="admin-user-profile">
+            <span class="user-avatar">👤</span>
+            <div class="user-details">
+              <span id="admin-username-display" class="user-name">Admin DINOS</span>
+              <span class="user-role">Operador Chefe</span>
+            </div>
+          </div>
+
+          <button type="button" id="btn-logout" class="btn btn-outline-danger btn-sm" title="Encerrar Sessão">
+            <span>Sair</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Content Area with Tab Panes -->
+      <main id="admin-content" class="admin-content">
+
+        <!-- Tab 1: Orders / Kanban -->
+        <section id="tab-orders" class="tab-pane">
+          <div class="tab-toolbar">
+            <div class="toolbar-info">
+              <h3 class="section-title">Monitor Kanban de Pedidos</h3>
+              <p class="section-desc">Acompanhe a produção da cozinha e delivery em tempo real com auto-polling a cada 20s.</p>
+            </div>
+            <div class="toolbar-actions">
+              <button type="button" id="btn-refresh-orders" class="btn btn-secondary btn-sm">
+                🔄 Atualizar Agora
+              </button>
+            </div>
+          </div>
+
+          <div id="orders-kanban-board" class="kanban-board">
+            <!-- Column 1: Pending / Confirmed -->
+            <div class="kanban-column kanban-col-pending" data-status-group="pending">
+              <div class="kanban-column-header">
+                <span class="kanban-column-title">⏳ Novos / Pendentes</span>
+                <span class="kanban-column-count" id="count-col-pending">0</span>
+              </div>
+              <div class="kanban-cards-container" id="cards-col-pending">
+                <div class="kanban-empty-column">Nenhum pedido novo</div>
+              </div>
+            </div>
+
+            <!-- Column 2: In Preparation -->
+            <div class="kanban-column kanban-col-in_preparation" data-status-group="in_preparation">
+              <div class="kanban-column-header">
+                <span class="kanban-column-title">🔥 Em Preparo</span>
+                <span class="kanban-column-count" id="count-col-in_preparation">0</span>
+              </div>
+              <div class="kanban-cards-container" id="cards-col-in_preparation">
+                <div class="kanban-empty-column">Nenhum pedido em preparo</div>
+              </div>
+            </div>
+
+            <!-- Column 3: Out for Delivery -->
+            <div class="kanban-column kanban-col-out_for_delivery" data-status-group="out_for_delivery">
+              <div class="kanban-column-header">
+                <span class="kanban-column-title">🛵 Em Rota</span>
+                <span class="kanban-column-count" id="count-col-out_for_delivery">0</span>
+              </div>
+              <div class="kanban-cards-container" id="cards-col-out_for_delivery">
+                <div class="kanban-empty-column">Nenhum pedido em rota</div>
+              </div>
+            </div>
+
+            <!-- Column 4: Delivered -->
+            <div class="kanban-column kanban-col-delivered" data-status-group="delivered">
+              <div class="kanban-column-header">
+                <span class="kanban-column-title">✅ Concluídos</span>
+                <span class="kanban-column-count" id="count-col-delivered">0</span>
+              </div>
+              <div class="kanban-cards-container" id="cards-col-delivered">
+                <div class="kanban-empty-column">Nenhum pedido concluído</div>
+              </div>
+            </div>
+
+            <!-- Column 5: Cancelled -->
+            <div class="kanban-column kanban-col-cancelled" data-status-group="cancelled">
+              <div class="kanban-column-header">
+                <span class="kanban-column-title">❌ Cancelados</span>
+                <span class="kanban-column-count" id="count-col-cancelled">0</span>
+              </div>
+              <div class="kanban-cards-container" id="cards-col-cancelled">
+                <div class="kanban-empty-column">Nenhum pedido cancelado</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab 2: Products Management -->
+        <section id="tab-products" class="tab-pane tab-pane--active">
+          <div class="tab-toolbar">
+            <div class="toolbar-search-filter">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input
+                  type="text"
+                  id="products-search"
+                  class="form-input search-input"
+                  placeholder="Buscar produto por nome..."
+                  aria-label="Buscar produto"
+                >
+              </div>
+
+              <div class="filter-box">
+                <label for="products-category-filter" class="sr-only">Filtrar por Categoria</label>
+                <select id="products-category-filter" class="form-select filter-select">
+                  <option value="">Todas as Categorias</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="toolbar-actions">
+              <button type="button" id="btn-new-product" class="btn btn-primary">
+                <span>+ Novo Produto</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table" id="products-table">
+              <thead>
+                <tr>
+                  <th style="width: 80px;">Foto</th>
+                  <th>Produto / Descrição</th>
+                  <th style="width: 140px;">Categoria</th>
+                  <th style="width: 130px;">Preço</th>
+                  <th style="width: 110px; text-align: center;">Disponível</th>
+                  <th style="width: 110px; text-align: center;">Promoção</th>
+                  <th style="width: 110px; text-align: center;">Destaque</th>
+                  <th style="width: 140px; text-align: center;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="products-table-body">
+                <tr>
+                  <td colspan="8" class="table-loading-cell">
+                    <div class="spinner-inline"></div> Carregando cardápio...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Tab 3: Combos Management -->
+        <section id="tab-combos" class="tab-pane">
+          <div class="tab-toolbar">
+            <div class="toolbar-search-filter">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input
+                  type="text"
+                  id="combos-search"
+                  class="form-input search-input"
+                  placeholder="Buscar combo por título..."
+                  aria-label="Buscar combo"
+                >
+              </div>
+            </div>
+
+            <div class="toolbar-actions">
+              <button type="button" id="btn-new-combo" class="btn btn-primary">
+                <span>+ Novo Combo</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table" id="combos-table">
+              <thead>
+                <tr>
+                  <th style="width: 80px;">Foto</th>
+                  <th>Combo / Itens Inclusos</th>
+                  <th style="width: 140px;">Preço</th>
+                  <th style="width: 120px; text-align: center;">Disponível</th>
+                  <th style="width: 140px; text-align: center;">Promo do Dia</th>
+                  <th style="width: 140px; text-align: center;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="combos-table-body">
+                <tr>
+                  <td colspan="6" class="table-loading-cell">
+                    <div class="spinner-inline"></div> Carregando combos...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Tab 4: Delivery Zones -->
+        <section id="tab-zones" class="tab-pane">
+          <div class="tab-toolbar">
+            <div class="toolbar-search-filter">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input
+                  type="text"
+                  id="zones-search"
+                  class="form-input search-input"
+                  placeholder="Buscar bairro por nome..."
+                  aria-label="Buscar bairro"
+                >
+              </div>
+            </div>
+
+            <div class="toolbar-actions">
+              <button type="button" id="btn-new-zone" class="btn btn-primary">
+                <span>+ Novo Bairro</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table" id="zones-table">
+              <thead>
+                <tr>
+                  <th>Nome do Bairro</th>
+                  <th style="width: 150px;">Taxa de Entrega</th>
+                  <th style="width: 150px;">Pedido Mínimo</th>
+                  <th style="width: 160px;">Tempo Estimado</th>
+                  <th style="width: 100px; text-align: center;">Ativo</th>
+                  <th style="width: 140px; text-align: center;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="zones-table-body">
+                <tr>
+                  <td colspan="6" class="table-loading-cell">
+                    <div class="spinner-inline"></div> Carregando bairros...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Tab 5: Coupons Management -->
+        <section id="tab-coupons" class="tab-pane">
+          <div class="tab-toolbar">
+            <div class="toolbar-search-filter">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input
+                  type="text"
+                  id="coupons-search"
+                  class="form-input search-input"
+                  placeholder="Buscar cupom por código ou descrição..."
+                  aria-label="Buscar cupom"
+                >
+              </div>
+            </div>
+
+            <div class="toolbar-actions">
+              <button type="button" id="btn-new-coupon" class="btn btn-primary">
+                <span>+ Novo Cupom</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table" id="coupons-table">
+              <thead>
+                <tr>
+                  <th style="width: 140px;">Código</th>
+                  <th>Descrição</th>
+                  <th style="width: 130px;">Desconto</th>
+                  <th style="width: 130px;">Subtotal Mín.</th>
+                  <th style="width: 110px; text-align: center;">Usos / Limite</th>
+                  <th style="width: 100px; text-align: center;">Ativo</th>
+                  <th style="width: 140px; text-align: center;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="coupons-table-body">
+                <tr>
+                  <td colspan="7" class="table-loading-cell">
+                    <div class="spinner-inline"></div> Carregando cupons...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Tab 6: Reviews Management -->
+        <section id="tab-reviews" class="tab-pane">
+          <div class="tab-toolbar">
+            <div class="toolbar-search-filter">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input
+                  type="text"
+                  id="reviews-search"
+                  class="form-input search-input"
+                  placeholder="Buscar avaliação por cliente ou comentário..."
+                  aria-label="Buscar avaliação"
+                >
+              </div>
+            </div>
+
+            <div class="toolbar-actions">
+              <button type="button" id="btn-new-review" class="btn btn-primary">
+                <span>+ Nova Avaliação</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table" id="reviews-table">
+              <thead>
+                <tr>
+                  <th style="width: 160px;">Cliente</th>
+                  <th style="width: 120px;">Nota</th>
+                  <th>Comentário</th>
+                  <th style="width: 100px; text-align: center;">Publicado</th>
+                  <th style="width: 140px; text-align: center;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="reviews-table-body">
+                <tr>
+                  <td colspan="5" class="table-loading-cell">
+                    <div class="spinner-inline"></div> Carregando avaliações...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Tab 7: Storefront Text Settings -->
+        <section id="tab-settings" class="tab-pane">
+          <div class="tab-toolbar">
+            <div class="toolbar-info">
+              <h3 class="section-title">Textos exibidos aos clientes</h3>
+              <p class="section-desc">Altere chamadas, destaques e textos da landing page pública. Produtos, preços, combos e taxas continuam nas abas próprias.</p>
+            </div>
+            <div class="toolbar-actions">
+              <button type="button" id="btn-save-site-content" class="btn btn-primary">
+                <span>Salvar Textos</span>
+              </button>
+            </div>
+          </div>
+
+          <form id="site-content-form" class="settings-form" novalidate>
+            <div id="site-content-fields" class="settings-grid">
+              <div class="table-loading-cell"><div class="spinner-inline"></div> Carregando textos do site...</div>
+            </div>
+          </form>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3. MODALS CONTAINER
+       ========================================================================= -->
+
+  <!-- Modal: Product (Create / Edit) -->
+  <div id="modal-product" class="modal-overlay d-none" aria-hidden="true" role="dialog" aria-labelledby="modal-product-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-product-title" class="modal-title">Novo Produto</h3>
+        <button type="button" id="modal-product-close" class="btn-close" aria-label="Fechar Modal">&times;</button>
+      </div>
+
+      <form id="product-form" class="modal-form" novalidate>
+        <input type="hidden" id="product-id" name="id">
+        <input type="hidden" id="product-image-url" name="image_url">
+
+        <div class="modal-body">
+          <!-- Dropzone Upload Area -->
+          <div class="form-group">
+            <label class="form-label">Foto do Produto (WebP Otimizado)</label>
+            <div id="product-dropzone" class="dropzone">
+              <input type="file" id="product-file-input" class="dropzone-file-input" accept="image/jpeg,image/png,image/webp">
+              <div class="dropzone-content">
+                <div class="dropzone-icon">📷</div>
+                <p class="dropzone-text"><strong>Arraste uma foto aqui</strong> ou clique para selecionar</p>
+                <p class="dropzone-hint">Formatos: JPEG, PNG, WebP (Máx 10MB). O servidor converterá para WebP &lt; 150KB.</p>
+              </div>
+              <div class="dropzone-spinner d-none">
+                <div class="spinner"></div>
+                <span>Otimizando imagem...</span>
+              </div>
+              <div id="product-preview-wrapper" class="dropzone-preview d-none">
+                <img id="product-image-preview" src="" alt="Preview do Produto">
+                <button type="button" id="product-remove-image-btn" class="btn-remove-image" title="Remover Imagem">&times;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Title & Category -->
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="product-title" class="form-label">Nome do Produto *</label>
+              <input type="text" id="product-title" name="title" class="form-input" placeholder="Ex: T-Rex Bacon Supreme" required>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="product-category" class="form-label">Categoria *</label>
+              <select id="product-category" name="category_id" class="form-select" required>
+                <option value="">Selecione...</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label for="product-description" class="form-label">Descrição dos Ingredientes / Detalhes</label>
+            <textarea id="product-description" name="description" class="form-textarea" rows="3" placeholder="Ex: Molho rústico de tomate, muçarela especial, fatias crocantes de bacon e orégano fresco."></textarea>
+          </div>
+
+          <!-- Price & Promo -->
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="product-price" class="form-label">Preço Unitário (R$) *</label>
+              <input type="number" id="product-price" name="price" class="form-input" placeholder="0,00" step="0.01" min="0.01" required>
+            </div>
+
+            <div class="form-group flex-1 form-checkboxes-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="product-is-active" name="is_active" checked>
+                <span>Disponível para pedidos</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="product-is-promo" name="is_promo">
+                <span>Destaque Promoção</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="product-is-featured" name="is_featured">
+                <span>⭐ Mais Pedidas</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-product" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" id="btn-save-product" class="btn btn-primary">
+            <span>Salvar Produto</span>
+            <span class="btn-spinner d-none" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Combo (Create / Edit) -->
+  <div id="modal-combo" class="modal-overlay d-none" aria-hidden="true" role="dialog" aria-labelledby="modal-combo-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-combo-title" class="modal-title">Novo Combo</h3>
+        <button type="button" id="modal-combo-close" class="btn-close" aria-label="Fechar Modal">&times;</button>
+      </div>
+
+      <form id="combo-form" class="modal-form" novalidate>
+        <input type="hidden" id="combo-id" name="id">
+        <input type="hidden" id="combo-image-url" name="image_url">
+
+        <div class="modal-body">
+          <!-- Dropzone Upload Area -->
+          <div class="form-group">
+            <label class="form-label">Foto do Combo (WebP Otimizado)</label>
+            <div id="combo-dropzone" class="dropzone">
+              <input type="file" id="combo-file-input" class="dropzone-file-input" accept="image/jpeg,image/png,image/webp">
+              <div class="dropzone-content">
+                <div class="dropzone-icon">🦖</div>
+                <p class="dropzone-text"><strong>Arraste uma foto aqui</strong> ou clique para selecionar</p>
+                <p class="dropzone-hint">Formatos: JPEG, PNG, WebP (Máx 10MB). O servidor converterá para WebP &lt; 150KB.</p>
+              </div>
+              <div class="dropzone-spinner d-none">
+                <div class="spinner"></div>
+                <span>Otimizando imagem...</span>
+              </div>
+              <div id="combo-preview-wrapper" class="dropzone-preview d-none">
+                <img id="combo-image-preview" src="" alt="Preview do Combo">
+                <button type="button" id="combo-remove-image-btn" class="btn-remove-image" title="Remover Imagem">&times;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Combo Title -->
+          <div class="form-group">
+            <label for="combo-title" class="form-label">Título do Combo *</label>
+            <input type="text" id="combo-title" name="title" class="form-input" placeholder="Ex: Combo Família Jurássica" required>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label for="combo-description" class="form-label">Itens Inclusos & Descrição *</label>
+            <textarea id="combo-description" name="description" class="form-textarea" rows="3" placeholder="Ex: 2 Pizzas Grandes + 1 Refrigerante 2L + 1 Pizza Doce Broto." required></textarea>
+          </div>
+
+          <!-- Price & Promo -->
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="combo-price" class="form-label">Preço do Combo (R$) *</label>
+              <input type="number" id="combo-price" name="price" class="form-input" placeholder="0,00" step="0.01" min="0.01" required>
+            </div>
+
+            <div class="form-group flex-1 form-checkboxes-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="combo-is-active" name="is_active" checked>
+                <span>Disponível para pedidos</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="combo-is-promo" name="is_promo_of_day">
+                <span>Promoção do Dia 🔥</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-combo" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" id="btn-save-combo" class="btn btn-primary">
+            <span>Salvar Combo</span>
+            <span class="btn-spinner d-none" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Delivery Zone (Create / Edit) -->
+  <div id="modal-zone" class="modal-overlay d-none" aria-hidden="true" role="dialog" aria-labelledby="modal-zone-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-zone-title" class="modal-title">Novo Bairro de Entrega</h3>
+        <button type="button" id="modal-zone-close" class="btn-close" aria-label="Fechar Modal">&times;</button>
+      </div>
+
+      <form id="zone-form" class="modal-form" novalidate>
+        <input type="hidden" id="zone-id" name="id">
+
+        <div class="modal-body">
+          <!-- Zone Name -->
+          <div class="form-group">
+            <label for="zone-name" class="form-label">Nome do Bairro / Região *</label>
+            <input type="text" id="zone-name" name="name" class="form-input" placeholder="Ex: Centro, Jardim América, Bela Vista" required>
+          </div>
+
+          <!-- Fee, Min Order & Estimated Time -->
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="zone-fee" class="form-label">Taxa de Entrega (R$) *</label>
+              <input type="number" id="zone-fee" name="fee" class="form-input" placeholder="0,00" step="0.01" min="0.00" required>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="zone-min-order-value" class="form-label">Pedido Mínimo (R$)</label>
+              <input type="number" id="zone-min-order-value" name="min_order_value" class="form-input" placeholder="0,00" step="0.01" min="0.00">
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="zone-estimated-minutes" class="form-label">Tempo Estimado (minutos)</label>
+              <input type="number" id="zone-estimated-minutes" name="estimated_minutes" class="form-input" placeholder="Ex: 40" step="1" min="1">
+            </div>
+          </div>
+
+          <!-- Active Status -->
+          <div class="form-group form-checkboxes-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="zone-is-active" name="is_active" checked>
+              <span>Ativo para pedidos de delivery</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-zone" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" id="btn-save-zone" class="btn btn-primary">
+            <span>Salvar Bairro</span>
+            <span class="btn-spinner d-none" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Coupon (Create / Edit) -->
+  <div id="modal-coupon" class="modal-overlay d-none" aria-hidden="true" role="dialog" aria-labelledby="modal-coupon-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-coupon-title" class="modal-title">Novo Cupom de Desconto</h3>
+        <button type="button" id="modal-coupon-close" class="btn-close" aria-label="Fechar Modal">&times;</button>
+      </div>
+
+      <form id="coupon-form" class="modal-form" novalidate>
+        <input type="hidden" id="coupon-id" name="id">
+
+        <div class="modal-body">
+          <!-- Code & Description -->
+          <div class="form-group">
+            <label for="coupon-code" class="form-label">Código do Cupom *</label>
+            <input type="text" id="coupon-code" name="code" class="form-input" placeholder="Ex: DINOS10, BEMVINDO, FAMILIA20" style="text-transform: uppercase;" required>
+          </div>
+
+          <div class="form-group">
+            <label for="coupon-description" class="form-label">Descrição / Regra</label>
+            <input type="text" id="coupon-description" name="description" class="form-input" placeholder="Ex: 10% de desconto acima de R$ 50">
+          </div>
+
+          <!-- Type & Value -->
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="coupon-discount-type" class="form-label">Tipo de Desconto *</label>
+              <select id="coupon-discount-type" name="discount_type" class="form-select" required>
+                <option value="percentage">Porcentagem (%)</option>
+                <option value="fixed">Valor Fixo (R$)</option>
+              </select>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="coupon-discount-value" class="form-label">Valor do Desconto *</label>
+              <input type="number" id="coupon-discount-value" name="discount_value" class="form-input" placeholder="Ex: 10 para 10% ou R$ 10" step="0.01" min="0.01" required>
+            </div>
+          </div>
+
+          <!-- Min Subtotal & Max Discount -->
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="coupon-min-subtotal" class="form-label">Subtotal Mínimo (R$)</label>
+              <input type="number" id="coupon-min-subtotal" name="min_subtotal" class="form-input" placeholder="0,00" step="0.01" min="0.00">
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="coupon-max-discount" class="form-label">Teto Desconto (R$)</label>
+              <input type="number" id="coupon-max-discount" name="max_discount_amount" class="form-input" placeholder="Opcional p/ %" step="0.01" min="0.00">
+            </div>
+          </div>
+
+          <!-- Max Uses & Expiration -->
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="coupon-max-uses" class="form-label">Limite de Usos (Total)</label>
+              <input type="number" id="coupon-max-uses" name="max_uses" class="form-input" placeholder="Vazio = ilimitado" step="1" min="1">
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="coupon-valid-until" class="form-label">Válido Até (Data/Hora)</label>
+              <input type="datetime-local" id="coupon-valid-until" name="valid_until" class="form-input">
+            </div>
+          </div>
+
+          <!-- Active Status -->
+          <div class="form-group form-checkboxes-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="coupon-is-active" name="is_active" checked>
+              <span>Cupom ativo para uso</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-coupon" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" id="btn-save-coupon" class="btn btn-primary">
+            <span>Salvar Cupom</span>
+            <span class="btn-spinner d-none" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Review (Create / Edit) -->
+  <div id="modal-review" class="modal-overlay d-none" aria-hidden="true" role="dialog" aria-labelledby="modal-review-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-review-title" class="modal-title">Nova Avaliação / Depoimento</h3>
+        <button type="button" id="modal-review-close" class="btn-close" aria-label="Fechar Modal">&times;</button>
+      </div>
+
+      <form id="review-form" class="modal-form" novalidate>
+        <input type="hidden" id="review-id" name="id">
+
+        <div class="modal-body">
+          <!-- Customer Name & Rating -->
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="review-customer-name" class="form-label">Nome do Cliente *</label>
+              <input type="text" id="review-customer-name" name="customer_name" class="form-input" placeholder="Ex: Camila Silva" required>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="review-rating" class="form-label">Nota (1 a 5) *</label>
+              <select id="review-rating" name="rating" class="form-select" required>
+                <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                <option value="4">⭐⭐⭐⭐ (4)</option>
+                <option value="3">⭐⭐⭐ (3)</option>
+                <option value="2">⭐⭐ (2)</option>
+                <option value="1">⭐ (1)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Comment -->
+          <div class="form-group">
+            <label for="review-comment" class="form-label">Comentário / Depoimento *</label>
+            <textarea id="review-comment" name="comment" class="form-textarea" rows="3" placeholder="Ex: A melhor pizza da região! Massa crocante e quentinha." required></textarea>
+          </div>
+
+          <!-- Published Status -->
+          <div class="form-group form-checkboxes-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="review-is-published" name="is_published" checked>
+              <span>Exibir no site público</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-review" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" id="btn-save-review" class="btn btn-primary">
+            <span>Salvar Avaliação</span>
+            <span class="btn-spinner d-none" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Order Details & Status Advance -->
+  <div id="modal-order-details" class="modal-overlay d-none" aria-hidden="true" role="dialog" aria-labelledby="modal-order-title">
+    <div class="modal-card modal-card--lg">
+      <div class="modal-header">
+        <div class="order-header-info">
+          <h3 id="modal-order-title" class="modal-title">Pedido #000</h3>
+          <span id="order-detail-status-badge" class="order-badge">PENDENTE</span>
+        </div>
+        <button type="button" id="modal-order-close" class="btn-close" aria-label="Fechar Modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="order-details-grid">
+          <!-- Customer Info -->
+          <div class="order-info-block">
+            <div class="order-info-title">👤 Dados do Cliente</div>
+            <div class="order-info-line"><strong>Nome:</strong> <span id="order-customer-name">-</span></div>
+            <div class="order-info-line">
+              <strong>WhatsApp:</strong> <span id="order-customer-phone">-</span>
+              <a id="order-whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-link-btn d-none">
+                Abrir Conversa 💬
+              </a>
+            </div>
+            <div class="order-info-line"><strong>Criado em:</strong> <span id="order-created-at">-</span></div>
+          </div>
+
+          <!-- Delivery / Payment Info -->
+          <div class="order-info-block">
+            <div class="order-info-title">🛵 Entrega & Pagamento</div>
+            <div class="order-info-line"><strong>Tipo:</strong> <span id="order-delivery-type">-</span></div>
+            <div class="order-info-line"><strong>Atendimento:</strong> <span id="order-fulfillment-type">-</span></div>
+            <div class="order-info-line"><strong>Endereço:</strong> <span id="order-address">-</span></div>
+            <div class="order-info-line"><strong>Pagamento:</strong> <span id="order-payment-method">-</span></div>
+            <div id="order-change-wrapper" class="order-info-line d-none">
+              <strong>Troco para:</strong> <span id="order-change-for">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Observation -->
+        <div id="order-notes-block" class="order-info-block d-none" style="margin-bottom: var(--space-md);">
+          <div class="order-info-title">📝 Observações do Pedido</div>
+          <div id="order-customer-notes" class="order-info-line" style="color: var(--color-gold); font-style: italic;"></div>
+        </div>
+
+        <!-- Items List -->
+        <div class="order-info-title">🍕 Itens do Pedido</div>
+        <div id="order-items-container" class="order-items-list">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Financial Summary -->
+        <div class="order-financial-summary">
+          <div class="order-financial-row">
+            <span>Subtotal dos Itens:</span>
+            <span id="order-subtotal-val">R$ 0,00</span>
+          </div>
+          <div id="order-discount-row" class="order-financial-row d-none" style="color: var(--color-gold);">
+            <span>Desconto (<span id="order-coupon-code">-</span>):</span>
+            <span id="order-discount-val">- R$ 0,00</span>
+          </div>
+          <div class="order-financial-row">
+            <span>Taxa de Entrega:</span>
+            <span id="order-delivery-fee-val">R$ 0,00</span>
+          </div>
+          <div class="order-financial-row order-financial-row--total">
+            <span>Valor Total:</span>
+            <span id="order-total-val">R$ 0,00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="order-modal-actions">
+          <button type="button" id="btn-cancel-order-status" class="btn btn-outline-danger btn-sm">
+            Cancelar Pedido ❌
+          </button>
+          <button type="button" id="btn-advance-order-status" class="btn btn-primary">
+            <span id="btn-advance-label">Avançar Status ➔</span>
+            <span class="btn-spinner d-none" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ES6 Modules Entry Point -->
+  <script type="module" src="/admin/js/admin-app.js"></script>
+</body>
+</html>

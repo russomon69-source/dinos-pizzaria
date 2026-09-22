@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(gsd-sdk *)",
+      "PowerShell(git init *)",
+      "PowerShell(Test-Path *)",
+      "WebSearch",
+      "Skill(gsd-execute-phase)",
+      "PowerShell($env:PATH -split ';')",
+      "PowerShell(Get-Command *)",
+      "PowerShell(& python --version)",
+      "PowerShell(python -m pytest backend/tests/test_orders.py -v)",
+      "PowerShell(py *)",
+      "Skill(gsd-quick)",
+      "PowerShell(pytest *)",
+      "PowerShell(python -c \"import backend.app.main; print\\('Backend import successful!'\\)\")",
+      "PowerShell(python -c \"import sys; sys.path.insert\\(0, 'backend'\\); import app.main; print\\('Successfully imported app.main with app-dir backend!'\\)\")",
+      "PowerShell(python -m uvicorn app.main:app --app-dir backend --help)",
+      "PowerShell(python -c \"import backend.app.main; print\\('Successfully imported backend.app.main!'\\)\")",
+      "PowerShell(Get-NetTCPConnection *)",
+      "PowerShell(Invoke-RestMethod -Uri \"http://127.0.0.1:8000/api/v1/health\" -Method Get)",
+      "PowerShell(\\(Invoke-WebRequest -Uri \"http://127.0.0.1:8000/\" -UseBasicParsing\\).StatusCode; \\(Invoke-RestMethod -Uri \"http://127.0.0.1:8000/api/v1/health\" -Method Get\\).status)"
+    ]
+  }
+}
