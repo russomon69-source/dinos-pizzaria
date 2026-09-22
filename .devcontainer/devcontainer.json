@@ -1,0 +1,13 @@
+{
+  "name": "DINOS Pizzaria",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "postCreateCommand": "pip install -r backend/requirements.txt && python backend/seed_data.py",
+  "postStartCommand": "python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "DINOS Pizzaria",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}
